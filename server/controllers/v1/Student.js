@@ -22,6 +22,37 @@ class StudentController extends Controller {
     super.find(req, res, next);
   }
 
+  findCode(req, res, next) {
+    // this.attribs = this.attribs || {};
+    // // uncomment to debug
+    // //this.attribs.debug = true;
+
+    // this.applyRelations(req.query);
+
+    let code = req.params.code;
+
+    new Student({ code: code })
+      .fetch()
+      .then(student => {
+        delete student.password;
+        res.status(200).send(student);
+      })
+      .catch(error => {
+        let details = this.getErrorDetails(error);
+        res.status(400).send({
+          message: 'Could not retrieve Authenticated user',
+          error: details,
+        });
+      });
+  };
+
+  // findCode(req, res, next) {
+  //   this.attribs = {
+  //     withRelated: ['faculty', 'classe'],
+  //   };
+  //   super.find(req, res, next);
+  // }
+
   update(req, res, next) {
     // Find model to get old filenames
     req.oldFilepaths = [];

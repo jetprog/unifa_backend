@@ -104,8 +104,9 @@ router.put('/classe-courses/:id', verifyToken, classeCourse.update.bind(classeCo
 router.delete('/classe-courses/:id', verifyToken, classeCourse.delete.bind(classeCourse));
 
 // endpoint for students (CRUD)
-router.get('/students', verifyToken, student.all.bind(student));
+router.get('/students', student.all.bind(student));
 router.get('/students/:id', verifyToken, student.find.bind(student));
+router.get('/students/code/:code', student.findCode.bind(student));
 router.post(
   '/students',
   verifyToken,
