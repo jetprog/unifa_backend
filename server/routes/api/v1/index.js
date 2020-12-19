@@ -133,7 +133,7 @@ router.get('/notes', note.all.bind(note));
 router.get('/notes/:id', verifyToken, note.find.bind(note));
 router.post('/notes', note.insert.bind(note));
 router.put('/notes/:id', verifyToken, note.update.bind(note));
-router.delete('/notes/:id', verifyToken, note.delete.bind(note));
+router.delete('/notes/:id', note.delete.bind(note));
 
 
 module.exports = router;
