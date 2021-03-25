@@ -112,6 +112,9 @@ router.post(
   studentMulter.fields([{ name: 'picture' }]),
   student.insert.bind(student)
 );
+
+router.post('/students/add', auth.insertStudents.bind(auth));
+
 router.put(
   '/students/:id',
   studentMulter.fields([{ name: 'picture' }]),

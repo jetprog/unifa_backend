@@ -82,6 +82,8 @@ class Auth extends Controller {
   insertStudents(req, res) {
     let data = req.body;
 
+    console.log(data);
+
     this.genSalt()
       .then(salt => {
         return this.genHash(data.password, salt);
@@ -89,6 +91,7 @@ class Auth extends Controller {
       .then(hash => {
         for (var i = 0; i < data.result.length; i++) {
           data.result[i].password = hash;
+          data.result[i].classe_id = data.classe_id
         }
 
         return Student.collection(data.result).invokeThen("save", null, { method: "insert" }).then(result => {
