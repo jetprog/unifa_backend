@@ -79,6 +79,33 @@ class Auth extends Controller {
       });
   }
 
+  insertStudents(req, res) {
+    let data = req.body;
+
+    this.genSalt()
+      .then(salt => {
+        return this.genHash(data.password, salt);
+      })
+      .then(hash => {
+        for (var i = 0; i < data.result.length; i++) {
+          data.result[i].password = hash;
+        }
+
+        return Student.collection(data.result).invokeThen("save", null, { method: "insert" }).then(result => {
+          // further logics
+          res.status(200).send({ result });
+        })
+
+      })
+      .catch(error => {
+        let details = this.getErrorDetails(error);
+        res.status(400).send({
+          message: 'Could not signup the student',
+          error: details
+        });
+      });
+  }
+
   // Signup method for student
   signup(req, res) {
     let data = req.body;

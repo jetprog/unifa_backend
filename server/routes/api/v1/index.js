@@ -109,13 +109,11 @@ router.get('/students/:id', verifyToken, student.find.bind(student));
 router.get('/students/code/:code', student.findCode.bind(student));
 router.post(
   '/students',
-  verifyToken,
   studentMulter.fields([{ name: 'picture' }]),
   student.insert.bind(student)
 );
 router.put(
   '/students/:id',
-  verifyToken,
   studentMulter.fields([{ name: 'picture' }]),
   student.update.bind(student)
 );
