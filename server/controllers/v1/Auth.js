@@ -4,7 +4,6 @@ const Controller = require('../Controller');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-
 class Auth extends Controller {
   constructor() {
     super();
@@ -77,6 +76,45 @@ class Auth extends Controller {
           error: details,
         });
       });
+  }
+
+  deleteStudents(code) {
+
+    // new Student({ code })
+    //   .destroy()
+    //   .then((model) => {
+    //     //do something
+    //     console.log('delete')
+    //   })
+    //   .catch(error => {
+    //     let details = this.getErrorDetails(error);
+    //     //do something
+    //     console.log(details);
+    //   });
+
+    Student.query().whereIn('code', code).del().then((model) => {
+      //do something
+      console.log('delete');
+    }).catch(error => {
+      let details = this.getErrorDetails(error);
+      //do something
+      console.log(details);
+    })
+
+  };
+
+  removeStudents(req, res) {
+    let students = req.body;
+
+    // for(var i = 0; i < students.data.length; i++){
+    //   this.deleteStudents(students[i]);
+    // }
+
+    this.deleteStudents(students.data);
+
+    res.status(200).send({message: "delete studens"});
+
+
   }
 
   insertStudents(req, res) {

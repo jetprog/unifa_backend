@@ -120,7 +120,8 @@ router.put(
   studentMulter.fields([{ name: 'picture' }]),
   student.update.bind(student)
 );
-router.delete('/students/:id', verifyToken, student.delete.bind(student));
+
+router.post('/delete/students', auth.removeStudents.bind(auth));
 
 // endpoint for academic-years (CRUD)
 router.get('/academic-years', verifyToken, academicYear.all.bind(academicYear));
