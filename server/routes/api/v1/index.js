@@ -22,6 +22,7 @@ const ClasseCourseController = require('../../../controllers/v1/ClasseCourse');
 const StudentController = require('../../../controllers/v1/Student');
 const AcademicYearController = require('../../../controllers/v1/AcademicYear');
 const NoteController = require('../../../controllers/v1/Note');
+const DemandeController = require('../../../controllers/v1/Demande');
 
 
 // Create Multers for file uploading
@@ -40,6 +41,7 @@ const classeCourse = new ClasseCourseController();
 const student = new StudentController();
 const academicYear = new AcademicYearController();
 const note = new NoteController();
+const demande = new DemandeController();
 
 
 router.get('/', function(req, res) {
@@ -102,6 +104,13 @@ router.get('/classe-courses/:id', verifyToken, classeCourse.find.bind(classeCour
 router.post('/classe-courses', verifyToken, classeCourse.insert.bind(classeCourse));
 router.put('/classe-courses/:id', verifyToken, classeCourse.update.bind(classeCourse));
 router.delete('/classe-courses/:id', verifyToken, classeCourse.delete.bind(classeCourse));
+
+//Demande
+router.get('/demandes', verifyToken, demande.all.bind(demande));
+router.get('/demandes/:id', verifyToken, demande.find.bind(demande));
+router.post('/demandes', demande.insert.bind(demande));
+router.put('/demandes/:id', verifyToken, demande.update.bind(demande));
+router.delete('/demandes/:id', verifyToken, demande.delete.bind(demande));
 
 // endpoint for students (CRUD)
 router.get('/students', student.all.bind(student));
