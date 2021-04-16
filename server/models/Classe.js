@@ -13,6 +13,9 @@ var Classe = bookshelf.Model.extend({
   notes() {
     return this.hasMany('Note');
   },
+  demandes() {
+    return this.hasMany('Demande');
+  },
 
 });
 

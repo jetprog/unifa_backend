@@ -106,8 +106,8 @@ router.put('/classe-courses/:id', verifyToken, classeCourse.update.bind(classeCo
 router.delete('/classe-courses/:id', verifyToken, classeCourse.delete.bind(classeCourse));
 
 //Demande
-router.get('/demandes', verifyToken, demande.all.bind(demande));
-router.get('/demandes/:id', verifyToken, demande.find.bind(demande));
+router.get('/demandes', demande.all.bind(demande));
+router.get('/demandes/:id', demande.find.bind(demande));
 router.post('/demandes', demande.insert.bind(demande));
 router.put('/demandes/:id', verifyToken, demande.update.bind(demande));
 router.delete('/demandes/:id', verifyToken, demande.delete.bind(demande));
